@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: spring-forestry
+  main:
+    banner-mode: off
+  datasource:
+    url: jdbc:postgresql://localhost:5432/forestry
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: classpath:/db/changes/db.changelog-master.xml
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 1KB
+      max-file-size: 200MB
+      max-request-size: 215MB
+      location: /home/upload

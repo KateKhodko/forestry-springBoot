@@ -1,0 +1,1 @@
+ALTER TABLE village ADD COLUMN version BIGINT;

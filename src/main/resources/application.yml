@@ -16,4 +16,11 @@ spring:
       file-size-threshold: 1KB
       max-file-size: 200MB
       max-request-size: 215MB
-      location: /home/upload
+      location: /home/kate/upload
+  jpa:
+    show-sql: true
+file:
+  location: /home/kate/upload
+server:
+  port: 8094
+

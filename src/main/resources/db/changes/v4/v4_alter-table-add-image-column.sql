@@ -1,0 +1,1 @@
+ALTER TABLE forester ADD COLUMN image_id VARCHAR(128);

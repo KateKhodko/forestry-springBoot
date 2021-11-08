@@ -34,12 +34,11 @@ public class VillageService implements BaseService<VillageDto> {
                 .collect(Collectors.toList());
     }
 
-    @Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
+    @Lock(LockModeType.PESSIMISTIC_FORCE_INCREMENT)
     @Transactional
     public VillageDto create(VillageDto villagesDto) {
         Village village = villageMapper.dtoToEntity(villagesDto);
-        Village savedVillage = villageRepository.save(village);
-        return villageMapper.entityToDto(savedVillage);
+        return villageMapper.entityToDto(villageRepository.saveAndFlush(village));
     }
 
     @Transactional

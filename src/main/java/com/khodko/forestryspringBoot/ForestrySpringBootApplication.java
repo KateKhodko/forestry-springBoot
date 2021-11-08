@@ -12,7 +12,5 @@ public class ForestrySpringBootApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ForestrySpringBootApplication.class, args);
-
-
     }
 }

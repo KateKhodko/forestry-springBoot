@@ -1,0 +1,1 @@
+ALTER TABLE profile RENAME COLUMN password TO pass;

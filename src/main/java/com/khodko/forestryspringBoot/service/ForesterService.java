@@ -4,19 +4,22 @@ import com.khodko.forestryspringBoot.dto.ForesterDto;
 import com.khodko.forestryspringBoot.entity.Forester;
 import com.khodko.forestryspringBoot.mapper.BaseMapper;
 import com.khodko.forestryspringBoot.repository.ForesterRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+import static com.khodko.forestryspringBoot.repository.specification.MySpecification.hasFirstName;
+import static com.khodko.forestryspringBoot.repository.specification.MySpecification.hasLastName;
 
+@Service
 public class ForesterService implements BaseService<ForesterDto> {
 
-    private BaseMapper<Forester, ForesterDto> mapper;
+    private final BaseMapper<Forester, ForesterDto> mapper;
     private final ForesterRepository foresterRepository;
 
     @Autowired
@@ -43,6 +46,23 @@ public class ForesterService implements BaseService<ForesterDto> {
     }
 
     @Transactional
+    public ForesterDto uploadImage(Long foresterId, String imageId) {
+        ForesterDto foresterDto = findById(foresterId);
+        foresterDto.setImageId(imageId);
+        return create(foresterDto);
+    }
+
+    @Transactional
+    public List<ForesterDto> createAll(List<ForesterDto> foresters) {
+
+        return foresterRepository.saveAll(foresters.stream()
+                .map(mapper::dtoToEntity)
+                .collect(Collectors.toList()))
+                .stream().map(mapper::entityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
     public void delete(Long id) {
         foresterRepository.deleteById(id);
     }
@@ -52,5 +72,24 @@ public class ForesterService implements BaseService<ForesterDto> {
         return foresterRepository.findById(id)
                 .map(mapper::entityToDto)
                 .orElse(null);
+    }
+
+    @Transactional
+    public List<ForesterDto> findByFirstnameAndLastname(String firstname, String lastname) {
+        return foresterRepository.findByName(firstname, lastname)
+                .stream().map(mapper::entityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<ForesterDto> findByFirstnameAndLastnameWithSpecification(String firstname, String lastname) {
+        Pageable pageable = Pageable.ofSize(10);
+
+        return foresterRepository.findAll(
+                Specification.where(hasFirstName(firstname))
+                        .and(hasLastName(lastname)), pageable)
+                .stream()
+                .map(mapper::entityToDto)
+                .collect(Collectors.toList());
     }
 }

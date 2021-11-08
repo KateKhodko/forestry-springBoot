@@ -1,16 +1,20 @@
 package com.khodko.forestryspringBoot.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Data
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
 @Entity
 @Table(name = "village")
 public class Village implements BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -18,5 +22,38 @@ public class Village implements BaseEntity {
     private String name;
 
     @Version
-    private Integer version;
+    private int version;
+
+    public Village() {
+    }
+
+    public Village(Long id, String name, int version) {
+        this.id = id;
+        this.name = name;
+        this.version = version;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
 }

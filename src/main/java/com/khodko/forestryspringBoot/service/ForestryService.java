@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class ForestryService implements BaseService<ForestryDto> {
 
     private final ForestryRepository forestryRepository;
-    private BaseMapper<Forestry, ForestryDto> mapper;
+    private final BaseMapper<Forestry, ForestryDto> mapper;
 
     @Autowired
     public ForestryService(ForestryRepository forestryRepository, BaseMapper<Forestry, ForestryDto> mapper) {

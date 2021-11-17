@@ -2,6 +2,7 @@ package com.khodko.forestryspringBoot.controller;
 
 import com.khodko.forestryspringBoot.dto.ForesterDto;
 import com.khodko.forestryspringBoot.service.ForesterService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,14 +23,14 @@ public class ForesterController {
         this.foresterService = foresterService;
     }
 
-    @GetMapping("/{firstname}/{lastname}")
-    public ResponseEntity<List<ForesterDto>> findForester(@PathVariable("firstname") String firstname,
-                                          @PathVariable("lastname") String lastname) {
+    @GetMapping("/")
+    public ResponseEntity<List<ForesterDto>> findForester(@RequestParam("firstname") String firstname,
+                                          @RequestParam("lastname") String lastname) {
         return ResponseEntity.ok(foresterService.findByFirstnameAndLastname(firstname, lastname));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ForesterDto> findForester(@PathVariable("id") Long id) {
+    public ResponseEntity<ForesterDto> findForester(Long id) {
         return ResponseEntity.ok(foresterService.findById(id));
     }
 
@@ -41,7 +42,7 @@ public class ForesterController {
 
     @PostMapping("/{id}")
     public ForesterDto uploadImage(@PathVariable("id") Long foresterId,
-                                       @RequestParam("image-id") String imageId) {
+                                       @RequestParam("image-id") String imageId) throws NotFoundException {
         return foresterService.uploadImage(foresterId, imageId);
     }
 

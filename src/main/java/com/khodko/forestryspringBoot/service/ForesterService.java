@@ -4,6 +4,7 @@ import com.khodko.forestryspringBoot.dto.ForesterDto;
 import com.khodko.forestryspringBoot.entity.Forester;
 import com.khodko.forestryspringBoot.mapper.BaseMapper;
 import com.khodko.forestryspringBoot.repository.ForesterRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -46,8 +47,11 @@ public class ForesterService implements BaseService<ForesterDto> {
     }
 
     @Transactional
-    public ForesterDto uploadImage(Long foresterId, String imageId) {
+    public ForesterDto uploadImage(Long foresterId, String imageId) throws NotFoundException {
         ForesterDto foresterDto = findById(foresterId);
+        if (foresterDto == null) {
+            throw new NotFoundException("no entity with this id");
+        }
         foresterDto.setImageId(imageId);
         return create(foresterDto);
     }
@@ -76,7 +80,7 @@ public class ForesterService implements BaseService<ForesterDto> {
 
     @Transactional
     public List<ForesterDto> findByFirstnameAndLastname(String firstname, String lastname) {
-        return foresterRepository.findByName(firstname, lastname)
+        return foresterRepository.findByFirstNameAndLastName(firstname, lastname)
                 .stream().map(mapper::entityToDto)
                 .collect(Collectors.toList());
     }

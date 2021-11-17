@@ -15,12 +15,12 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
-public class CustomRepositoryCustomImpl implements CustomRepository{
+public class CustomRepositoryCustomImpl implements CustomRepository {
 
     private final EntityManager em;
 
     @Override
-    public List<Forester> findByName(String firstname, String lastname) {
+    public List<Forester> findByFirstNameAndLastName(String firstname, String lastname) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Forester> cq = cb.createQuery(Forester.class);
 

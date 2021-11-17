@@ -7,8 +7,6 @@ import java.util.Set;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "planting")
 public class Planting implements BaseEntity {

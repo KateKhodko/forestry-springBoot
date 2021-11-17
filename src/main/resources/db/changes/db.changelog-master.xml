@@ -10,5 +10,10 @@
     <include  file="db/changes/v1/create-table-planting.sql"/>
     <include  file="db/changes/v1/create-hibernate-sequence.sql"/>
     <include  file="db/changes/v2/v2_alter-table-add-version-column.sql"/>
-
+    <include  file="db/changes/v3/v3_create-table-user.sql"/>
+    <include  file="db/changes/v3/v3_create-table-role.sql"/>
+    <include  file="db/changes/v4/v4_alter-table-add-role-column.sql"/>
+    <include  file="db/changes/v4/v4_insert-role-values.sql"/>
+    <include  file="db/changes/v4/v4_alter-table-add-image-column.sql"/>
+    <include  file="db/changes/v4/v4_alter-table-rename-password-column.sql"/>
 </databaseChangeLog>

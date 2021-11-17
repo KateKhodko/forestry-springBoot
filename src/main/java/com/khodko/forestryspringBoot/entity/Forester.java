@@ -1,11 +1,7 @@
 package com.khodko.forestryspringBoot.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
+
 
 @Entity
 @Table(name = "forester")
@@ -17,15 +13,19 @@ public class Forester implements BaseEntity {
     private Long id;
 
     @Column(name = "first_name", nullable = false, length = 64)
-    private String firstName;
+    private String firstname;
 
     @Column(name = "last_name", nullable = false, length = 64)
-    private String lastName;
+    private String lastname;
 
-    public Forester(Long id, String firstName, String lastName) {
+    @Column(name = "image_id")
+    private String imageId;
+
+    public Forester(Long id, String firstname, String lastname, String imageId) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.imageId = imageId;
     }
 
     public Forester() {
@@ -39,19 +39,27 @@ public class Forester implements BaseEntity {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
     }
 }

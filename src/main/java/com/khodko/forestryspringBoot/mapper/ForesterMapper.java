@@ -5,5 +5,5 @@ import com.khodko.forestryspringBoot.entity.Forester;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface ForesterMapper extends BaseMapper<Forester, ForesterDto>{
+public interface ForesterMapper extends BaseMapper<Forester, ForesterDto> {
 }

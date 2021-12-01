@@ -93,10 +93,10 @@ class ForesterServiceTest extends TestContainerConfig {
     }
 
     @Test
-    void findByFirstnameAndLastname() {
+    void findByFirstnameAndLastnameWithSpecification() {
         Forester savedForester = saveForester(firstname, lastname);
 
-        List<ForesterDto> foresters = foresterService.findByFirstnameAndLastname(firstname, lastname);
+        List<ForesterDto> foresters = foresterService.findByFirstnameAndLastnameWithSpecification(firstname, lastname);
 
         assertTrue(() ->
                 foresters.stream()

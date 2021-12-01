@@ -5,6 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.images.PullPolicy;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -16,7 +17,8 @@ public abstract class TestContainerConfig {
     public static PostgreSQLContainer<?> postgreDBContainer;
 
     static {
-        postgreDBContainer = new PostgreSQLContainer<>(IMAGE_VERSION);
+        postgreDBContainer = new PostgreSQLContainer<>(IMAGE_VERSION)
+                .withImagePullPolicy(PullPolicy.alwaysPull());
         postgreDBContainer.start();
     }
 
